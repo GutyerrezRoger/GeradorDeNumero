@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sorteador Café</title>
+  <style>
+    :root {
+      --cafe-1: #3E2723;
+      --cafe-2: #4E342E;
+      --cafe-3: #6D4C41;
+      --cafe-4: #A1887F;
+      --text-light: #F2F2F2;
+      --accent: #D7CCC8;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      color: var(--text-light);
+      background: linear-gradient(135deg, var(--cafe-1), var(--cafe-3));
+      background-size: 400% 400%;
+      animation: backgroundShift 15s ease infinite;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+      text-align: center;
+    }
+
+    @keyframes backgroundShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    .sorteador {
+      background-color: rgba(255, 255, 255, 0.05);
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      max-width: 400px;
+      width: 100%;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+
+    button {
+      background-color: var(--accent);
+      color: var(--cafe-1);
+      border: none;
+      padding: 12px 20px;
+      margin-top: 10px;
+      font-size: 1rem;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      width: 100%;
+    }
+
+    button:hover {
+      background-color: var(--cafe-4);
+    }
+
+    .resultado {
+      margin-top: 20px;
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--accent);
+    }
+  </style>
+</head>
+<body>
+  <h1>Sorteador de Números ☕</h1>
+  <div class="sorteador">
+    <input type="number" id="min" placeholder="Número mínimo (ex: 1)" />
+    <input type="number" id="max" placeholder="Número máximo (ex: 100)" />
+    <button onclick="sortear()">Sortear</button>
+    <div class="resultado" id="resultado"></div>
+  </div>
+
+  <script>
+    function sortear() {
+      const min = parseInt(document.getElementById('min').value);
+      const max = parseInt(document.getElementById('max').value);
+      const resultado = document.getElementById('resultado');
+
+      if (isNaN(min) || isNaN(max) || min >= max) {
+        resultado.textContent = 'Por favor, insira um intervalo válido.';
+        return;
+      }
+
+      const numero = Math.floor(Math.random() * (max - min + 1)) + min;
+      resultado.textContent = `Número sorteado: ${numero}`;
+    }
+  </script>
+</body>
+</html>
+
